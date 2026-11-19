@@ -2,550 +2,423 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101010">
-<title>YUMEAR — Wear Your Dreams</title>
-
-<style>
-:root {
-  --black: #101010;
-  --surface: #191919;
-  --white: #f4f1eb;
-  --red: #bd302d;
-  --gray: #999;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: Arial, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button { font: inherit; cursor: pointer; }
-
-/* NAVIGATION */
-
-header {
-  height: 75px;
-  padding: 0 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #292929;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: rgba(16,16,16,.96);
-}
-
-.logo {
-  font-size: 25px;
-  font-weight: 900;
-  letter-spacing: 3px;
-}
-
-.logo span { color: var(--red); }
-
-nav {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  font-size: 13px;
-  color: #ccc;
-}
-
-nav a:hover { color: white; }
-
-.menu {
-  display: none;
-  background: none;
-  color: white;
-  border: none;
-  font-size: 25px;
-}
-
-/* HERO */
-
-.hero {
-  min-height: 570px;
-  padding: 90px 8%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  background:
-    radial-gradient(ellipse at 80% 50%, #572020 0%, transparent 45%),
-    linear-gradient(120deg,#101010,#191313);
-}
-
-.hero-content { max-width: 600px; }
-
-.eyebrow {
-  color: #e35b54;
-  letter-spacing: 4px;
-  font-size: 11px;
-  margin-bottom: 25px;
-}
-
-.hero h1 {
-  font-size: clamp(55px,9vw,100px);
-  line-height: .95;
-  letter-spacing: -5px;
-}
-
-.hero h1 span { color: var(--red); }
-
-.hero p {
-  color: #aaa;
-  margin: 25px 0 35px;
-  line-height: 1.8;
-  max-width: 380px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 16px 25px;
-  background: var(--red);
-  color: white;
-  font-size: 12px;
-  letter-spacing: 1px;
-  font-weight: bold;
-  border: 1px solid var(--red);
-  transition: .3s;
-}
-
-.btn:hover {
-  background: transparent;
-  color: white;
-}
-
-.hero-art {
-  width: 320px;
-  height: 350px;
-  border: 1px solid #6c3434;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  background: linear-gradient(145deg,#241717,#111);
-  transform: rotate(2deg);
-}
-
-.hero-art::before {
-  content: "";
-  position: absolute;
-  inset: 15px;
-  border: 1px solid #6b3030;
-}
-
-.torii {
-  color: #d14a43;
-  font-size: 85px;
-  z-index: 1;
-}
-
-.hero-art strong {
-  font-size: 29px;
-  letter-spacing: 7px;
-  z-index: 1;
-}
-
-.hero-art small {
-  margin-top: 12px;
-  letter-spacing: 3px;
-  color: #aaa;
-  z-index: 1;
-}
-
-/* GENERAL SECTIONS */
-
-section { padding: 85px 8%; }
-
-.section-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  margin-bottom: 35px;
-  gap: 15px;
-}
-
-.section-label {
-  color: #d84b43;
-  font-size: 11px;
-  letter-spacing: 3px;
-  margin-bottom: 12px;
-}
-
-.section-title {
-  font-size: clamp(27px,4vw,40px);
-  letter-spacing: -1px;
-}
-
-.section-description {
-  color: var(--gray);
-  font-size: 13px;
-  line-height: 1.7;
-  margin-top: 12px;
-}
-
-/* CATEGORIES */
-
-.categories {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 18px;
-}
-
-.category {
-  min-height: 210px;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  background: linear-gradient(145deg,#392020,#181818);
-  border: 1px solid #333;
-  transition: .3s;
-}
-
-.category:nth-child(2) {
-  background: linear-gradient(145deg,#333,#171717);
-}
-
-.category:nth-child(3) {
-  background: linear-gradient(145deg,#402b1d,#171717);
-}
-
-.category:hover { transform: translateY(-5px); }
-
-.category span {
-  font-size: 11px;
-  color: #d76a61;
-  letter-spacing: 2px;
-}
-
-.category h3 {
-  font-size: 24px;
-  margin-top: 10px;
-}
-
-/* PRODUCTS */
-
-.products {
-  background: #151515;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 22px;
-}
-
-.product-card {
-  background: #202020;
-  border: 1px solid #303030;
-}
-
-.product-image {
-  height: 270px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle,#423030,#171717 75%);
-}
-
-.shirt {
-  width: 145px;
-  height: 170px;
-  background: #242424;
-  clip-path: polygon(25% 0,40% 8%,60% 8%,75% 0,
-  100% 25%,85% 42%,76% 34%,76% 100%,
-  24% 100%,24% 34%,15% 42%,0 25%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #d34a43;
-  font-size: 30px;
-}
-
-.product-info { padding: 18px; }
-
-.product-info h3 { font-size: 15px; }
-
-.product-info p {
-  color: #999;
-  font-size: 12px;
-  margin-top: 8px;
-}
-
-.product-price {
-  color: #e15a52;
-  font-weight: bold;
-  margin-top: 14px;
-  font-size: 14px;
-}
-
-.product-note {
-  color: #888;
-  font-size: 11px;
-  margin-top: 20px;
-}
-
-/* CUSTOMIZATION */
-
-.custom {
-  background: #1c1111;
-  text-align: center;
-  padding: 95px 8%;
-}
-
-.custom h2 {
-  font-size: clamp(30px,5vw,48px);
-  margin-bottom: 20px;
-}
-
-.custom p {
-  color: #bbb;
-  line-height: 1.8;
-  max-width: 500px;
-  margin: 0 auto 30px;
-}
-
-/* FOOTER */
-
-footer {
-  padding: 45px 8%;
-  border-top: 1px solid #333;
-  text-align: center;
-}
-
-footer .logo { margin-bottom: 15px; }
-
-footer p {
-  color: #888;
-  font-size: 12px;
-  line-height: 2;
-}
-
-footer small {
-  display: block;
-  margin-top: 25px;
-  color: #666;
-}
-
-/* MOBILE */
-
-@media(max-width:700px) {
-  header { padding: 0 5%; height: 65px; }
-
-  nav {
-    display: none;
-    position: absolute;
-    top: 65px;
-    left: 0;
-    width: 100%;
-    background: #151515;
-    flex-direction: column;
-    padding: 25px;
-  }
-
-  nav.active { display: flex; }
-
-  .menu { display: block; }
-
-  .hero {
-    min-height: auto;
-    padding: 75px 7%;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .hero-art {
-    width: 100%;
-    height: 250px;
-  }
-
-  section { padding: 65px 6%; }
-
-  .categories { grid-template-columns: 1fr; }
-
-  .category { min-height: 160px; }
-
-  .product-grid { grid-template-columns: repeat(2,1fr); gap: 12px; }
-
-  .product-image { height: 190px; }
-
-  .shirt {
-    width: 110px;
-    height: 135px;
-  }
-
-  .section-top { align-items: flex-start; flex-direction: column; }
-}
-
-@media(max-width:370px) {
-  .product-grid { grid-template-columns: 1fr; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="YUMEAR — Wear Your Dreams. Découvre nos T-shirts inspirés de l'univers anime et manga.">
+  <title>YUMEAR | Wear Your Dreams</title>
+
+  <style>
+    :root {
+      --red: #e32636;
+      --black: #111111;
+      --white: #ffffff;
+      --light: #f5f5f5;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* BARRE DE NAVIGATION */
+
+    header {
+      background: var(--white);
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eeeeee;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: var(--red);
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--red);
+    }
+
+    .nav-button {
+      background: var(--red);
+      color: white;
+      padding: 11px 18px;
+      border-radius: 4px;
+    }
+
+    /* GRANDE PHOTO DU HAUT */
+
+    .hero {
+      min-height: 480px;
+      padding: 70px 7%;
+      display: flex;
+      align-items: center;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.78), rgba(0,0,0,.15)),
+        url("images/hero-yumear.jpg") center/cover no-repeat;
+    }
+
+    .hero-content {
+      max-width: 580px;
+    }
+
+    .hero small {
+      color: #ff5360;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: 1.05;
+      margin: 18px 0;
+      font-weight: 900;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+
+    .main-button {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      padding: 15px 25px;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: .2s;
+    }
+
+    .main-button:hover {
+      background: #bd1828;
+      transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 75px 7%;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 38px;
+    }
+
+    .section-heading small {
+      color: var(--red);
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .section-heading h2 {
+      font-size: 34px;
+      margin-top: 8px;
+    }
+
+    .section-heading p {
+      color: #666;
+      margin-top: 8px;
+    }
+
+    /* BOUTIQUE */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .product-card {
+      background: var(--light);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .product-image {
+      height: 270px;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .product-info {
+      padding: 20px;
+    }
+
+    .product-info h3 {
+      font-size: 19px;
+      margin-bottom: 5px;
+    }
+
+    .product-info p {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .product-price {
+      color: var(--red);
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    /* PERSONNALISATION */
+
+    .custom-section {
+      background: var(--black);
+      color: white;
+      text-align: center;
+    }
+
+    .custom-section p {
+      color: #cccccc;
+      max-width: 600px;
+      margin: 12px auto 25px;
+    }
+
+    /* UNIVERS ANIME */
+
+    .anime-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .anime-placeholder {
+      height: 190px;
+      background: #eeeeee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      border-radius: 5px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #090909;
+      color: white;
+      padding: 40px 7%;
+      text-align: center;
+    }
+
+    footer p {
+      color: #bbbbbb;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    .footer-logo {
+      font-size: 26px;
+      font-weight: 900;
+    }
+
+    .footer-logo span {
+      color: var(--red);
+    }
+
+    /* VERSION MOBILE */
+
+    @media (max-width: 700px) {
+      header {
+        padding: 15px 5%;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      nav {
+        gap: 13px;
+        flex-wrap: wrap;
+      }
+
+      nav a {
+        font-size: 12px;
+      }
+
+      .nav-button {
+        padding: 8px 11px;
+      }
+
+      .hero {
+        min-height: 420px;
+        padding: 55px 6%;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      section {
+        padding: 55px 6%;
+      }
+
+      .products,
+      .anime-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-heading h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <a href="#" class="logo">YUMEAR<span>.</span></a>
+  <header>
+    <a href="#" class="logo">YUME<span>AR</span></a>
 
-  <nav id="navigation">
-    <a href="#home">ACCUEIL</a>
-    <a href="#collections">COLLECTIONS</a>
-    <a href="#products">BOUTIQUE</a>
-    <a href="#custom">PERSONNALISATION</a>
-  </nav>
+    <nav>
+      <a href="#">Accueil</a>
+      <a href="#boutique">Boutique</a>
+      <a href="#univers">Univers</a>
+      <a href="#personnalisation" class="nav-button">Personnaliser</a>
+    </nav>
+  </header>
 
-  <button class="menu" onclick="toggleMenu()" aria-label="Ouvrir le menu">☰</button>
-</header>
+  <main>
 
-<main>
+    <section class="hero">
+      <div class="hero-content">
+        <small>YUMEAR — WEAR YOUR DREAMS</small>
+        <h1>Ton univers.<br>Ton style.</h1>
+        <p>
+          Exprime ta passion à travers des T-shirts
+          inspirés de l'univers anime et manga.
+        </p>
+        <a href="#boutique" class="main-button">
+          Découvrir la boutique
+        </a>
+      </div>
+    </section>
 
-<section class="hero" id="home">
-  <div class="hero-content">
-    <div class="eyebrow">日本の美学 · JAPANESE AESTHETIC</div>
-    <h1>WEAR YOUR<br><span>DREAMS.</span></h1>
-    <p>
-      Plus qu'un vêtement, une identité.
-      Exprime ton univers à travers l'art
-      des mangas et de la culture japonaise.
-    </p>
-    <a href="#products" class="btn">EXPLORER LA COLLECTION ↗</a>
-  </div>
+    <section id="boutique">
+      <div class="section-heading">
+        <small>COLLECTION YUMEAR</small>
+        <h2>Découvre la boutique</h2>
+        <p>Choisis ton style et porte ce que tu aimes.</p>
+      </div>
 
-  <div class="hero-art">
-    <div class="torii">⛩</div>
-    <strong>YUMEAR</strong>
-    <small>WEAR YOUR DREAMS.</small>
-  </div>
-</section>
+      <div class="products">
 
-<section id="collections">
-  <div class="section-top">
-    <div>
-      <div class="section-label">EXPLORE TON UNIVERS</div>
-      <h2 class="section-title">NOS COLLECTIONS</h2>
-      <p class="section-description">
-        Chaque univers raconte une histoire.
+        <article class="product-card">
+          <div class="product-image">
+            Image du produit 1 à ajouter
+          </div>
+          <div class="product-info">
+            <h3>T-shirt YUMEAR</h3>
+            <p>Découvre notre collection.</p>
+            <div class="product-price">Prix à définir</div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            Image du produit 2 à ajouter
+          </div>
+          <div class="product-info">
+            <h3>T-shirt Anime</h3>
+            <p>Affiche ton univers préféré.</p>
+            <div class="product-price">Prix à définir</div>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-image">
+            Image du produit 3 à ajouter
+          </div>
+          <div class="product-info">
+            <h3>Collection spéciale</h3>
+            <p>Un style qui te ressemble.</p>
+            <div class="product-price">Prix à définir</div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="custom-section" id="personnalisation">
+      <div class="section-heading">
+        <small>CRÉE TON STYLE</small>
+        <h2>Personnalise ton T-shirt</h2>
+      </div>
+
+      <p>
+        Choisis ton modèle, tes visuels, ta taille et tes couleurs.
+        Imagine un T-shirt qui te ressemble vraiment.
       </p>
-    </div>
-  </div>
 
-  <div class="categories">
-    <a href="#products" class="category">
-      <span>01 / ANIME</span>
-      <h3>Anime Collection ↗</h3>
-    </a>
+      <a href="#contact" class="main-button">
+        Créer mon T-shirt
+      </a>
+    </section>
 
-    <a href="#products" class="category">
-      <span>02 / ART</span>
-      <h3>Japanese Art ↗</h3>
-    </a>
-
-    <a href="#products" class="category">
-      <span>03 / ORIGINAL</span>
-      <h3>YUMEAR Originals ↗</h3>
-    </a>
-  </div>
-</section>
-
-<section class="products" id="products">
-  <div class="section-top">
-    <div>
-      <div class="section-label">NOTRE SÉLECTION</div>
-      <h2 class="section-title">LES PLUS POPULAIRES</h2>
-      <p class="section-description">
-        Découvre nos créations et trouve ton style.
-      </p>
-    </div>
-  </div>
-
-  <div class="product-grid">
-
-    <article class="product-card">
-      <div class="product-image">
-        <div class="shirt">夢</div>
+    <section id="univers">
+      <div class="section-heading">
+        <small>EXPLORE TON UNIVERS</small>
+        <h2>Nos univers</h2>
+        <p>Retrouve bientôt tes univers préférés.</p>
       </div>
-      <div class="product-info">
-        <h3>Collection 01</h3>
-        <p>Anime inspired design</p>
-        <div class="product-price">Bientôt disponible</div>
+
+      <div class="anime-grid">
+        <div class="anime-placeholder">Image anime 1 à ajouter</div>
+        <div class="anime-placeholder">Image anime 2 à ajouter</div>
+        <div class="anime-placeholder">Image anime 3 à ajouter</div>
       </div>
-    </article>
+    </section>
 
-    <article class="product-card">
-      <div class="product-image">
-        <div class="shirt">影</div>
-      </div>
-      <div class="product-info">
-        <h3>Collection 02</h3>
-        <p>Japanese aesthetic</p>
-        <div class="product-price">Bientôt disponible</div>
-      </div>
-    </article>
+  </main>
 
-    <article class="product-card">
-      <div class="product-image">
-        <div class="shirt">魂</div>
-      </div>
-      <div class="product-info">
-        <h3>Collection 03</h3>
-        <p>YUMEAR originals</p>
-        <div class="product-price">Bientôt disponible</div>
-      </div>
-    </article>
-
-  </div>
-
-  <p class="product-note">
-    Visuels de démonstration : les véritables modèles seront ajoutés prochainement.
-  </p>
-</section>
-
-<section class="custom" id="custom">
-  <div class="section-label">TON UNIVERS, TES RÈGLES</div>
-  <h2>IMAGINE. CRÉE. PORTE.</h2>
-  <p>
-    Tu n'as pas trouvé le design que tu recherches ?
-    Crée ton propre T-shirt en choisissant tes visuels
-    et en imaginant ta combinaison.
-  </p>
-  <a href="#" class="btn">PERSONNALISER MON T-SHIRT ↗</a>
-</section>
-
-</main>
-
-<footer>
-  <div class="logo">YUMEAR<span>.</span></div>
-  <p>WEAR YOUR DREAMS.</p>
-  <p>L'art de porter son univers.</p>
-  <small>© 2026 YUMEAR — Tous droits réservés.</small>
-</footer>
-
-<script>
-function toggleMenu() {
-  document.getElementById("navigation").classList.toggle("active");
-}
-</script>
+  <footer id="contact">
+    <div class="footer-logo">YUME<span>AR</span></div>
+    <p>WEAR YOUR DREAMS.</p>
+    <p>© 2026 YUMEAR — Tous droits réservés.</p>
+  </footer>
 
 </body>
 </html>
